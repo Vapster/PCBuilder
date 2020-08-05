@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 
 app.get('', (req, res)=>{
-    res.send("home page.");
+    res.json({done: true});
 })
 
 app.listen(3000, ()=>{
