@@ -4,34 +4,8 @@ import PCData from './PCData/PCData';
 import PCCustomization from './PCCustomization/PCCustomization';
 
 class PCBuilder extends Component {
-    state = { 
-        specifications: {
-            CPU: {
-                name:"",
-                price:""
-            },
-            GPU: {
-                name:"",
-                price:""
-            },
-            motherboard: {
-                name:"",
-                price:""
-            },
-            case: {
-                name:"",
-                price:""
-            },
-            memory: {
-                name:"",
-                price:""
-            },
-            storage: {
-                name:"",
-                price:""
-            }
-        }
-     }
+    state = {
+    }
     render() { 
         return (
             <Aux>
