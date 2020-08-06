@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Aux from '../../hoc/aux';
+import Aux from '../../hoc/auxiliry';
 import PCData from './PCData/PCData';
 import PCCustomization from './PCCustomization/PCCustomization';
 
