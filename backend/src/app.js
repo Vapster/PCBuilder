@@ -1,6 +1,8 @@
 const express = require('express')
-
+const cors = require('cors')
 const app = express()
+app.use(cors())
+app.use(express.json())
 
 const state = {
     CPU: {
@@ -56,8 +58,12 @@ app.get('', (req, res)=>{
 })
 
 app.post('/getprices', (req, res)=>{
-    var price = state[req.query.hardware][req.query.model];
-    res.send({price});
+	console.log(req)
+	console.log(req.data)
+	console.log(req.params)
+	console.log(req.body)
+    //var price = state[req.query.hardware][req.query.model];
+    res.send({"price": 150});
 })
 
 app.post('/gethardwares', (req, res)=>{
@@ -70,6 +76,6 @@ app.post('/getmodels', (req, res)=>{
     res.send(models);
 })
 
-app.listen(3000, ()=>{
+app.listen(8080, ()=>{
     console.log("server is up!");
 });

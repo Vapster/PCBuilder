@@ -7,9 +7,9 @@ class PCCustomization extends Component {
         return (
             <Aux>
                 <input type="radio" id="male" name="gender" value="male"/>
-                <label for="male">Male</label><br/>
+                <label htmlFor="male">Male</label><br/>
                 <input type="radio" id="female" name="gender" value="female"/>
-                <label for="female">Female</label>
+                <label htmlFor="female">Female</label>
             </Aux>
         );
     }
