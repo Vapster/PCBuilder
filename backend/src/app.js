@@ -58,13 +58,14 @@ app.get('', (req, res)=>{
 })
 
 app.post('/getprices', (req, res)=>{
-	console.log(req)
-	console.log(req.data)
-	console.log(req.params)
 	console.log(req.body)
     //var price = state[req.query.hardware][req.query.model];
     res.send({"price": 150});
 })
+
+app.get('/getall', (req, res) => {
+	res.send(state);
+});
 
 app.post('/gethardwares', (req, res)=>{
     var hardwares = Object.keys(state);

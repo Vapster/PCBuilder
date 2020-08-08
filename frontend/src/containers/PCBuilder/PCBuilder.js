@@ -6,23 +6,24 @@ import Axios from 'axios';
 
 class PCBuilder extends Component {
     state = {
+        customMenu: {}
     }
 
     componentDidMount(){
 
     	const paylod = {
     		title: "here is title."
-    	};
-
+        };
+        
         Axios({
-        	url: 'http://localhost:8080/getprices',
-        	method: 'POST',
+        	url: 'http://localhost:8080/getall',
+        	method: 'GET',
         	data: paylod
-        }).then(() => {
-        	console.log("done");
+        }).then((res) => {
+            this.setState({customMenu: res.data});
         })
         .catch(() => {
-        	console.log("error");
+        	console.log("error in /getall request");
         })
     }
 
@@ -33,7 +34,9 @@ class PCBuilder extends Component {
                     <div className=" col-sm-6 col-xs-12">
                         <div className="row">PC Image</div>
                         <div className="row">
-                        <PCCustomization/>
+                            <div className="col">
+                                <PCCustomization menu={this.state.customMenu}/>
+                            </div>
                             <PCData hardware="CPU" model="i58G" />
                         </div>
                     </div>
