@@ -9,17 +9,23 @@ const Collapse = (props) => {
     return(
             <div className="card">
                 <div className="card-header" id={headerid}>
-                <h2 className="mb-0">
-                    <button className="btn btn-link" type="button" data-toggle="collapse" data-target={`#${collapseid}`} aria-expanded="true" aria-controls={collapseid}>
-                    {props.hardware}
-                    </button>
-                </h2>
+                    <h2 className="mb-0">
+                        <button className="btn btn-link" type="button" data-toggle="collapse" data-target={`#${collapseid}`} aria-expanded="true" aria-controls={collapseid}>
+                        {props.hardware}
+                        </button>
+                    </h2>
                 </div>
 
                 <div id={collapseid} className="collapse" aria-labelledby={headerid} data-parent='#collapseofhardwares'>
-                <div className="card-body">
-                    List of models
-                </div>
+                    
+                    {Object.keys(props.models).map((model)=>{return (
+                        <div key={model} className="card-body">
+                            <div className="row">
+                                <input type="radio" id={model} name={props.hardware} value={model}/>
+                                <label htmlFor={model}>{model}</label><br/>
+                            </div>
+                        </div>
+                    );})}
                 </div>
             </div>
     );

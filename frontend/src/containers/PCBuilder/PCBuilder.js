@@ -6,7 +6,8 @@ import Axios from 'axios';
 
 class PCBuilder extends Component {
     state = {
-        customMenu: {}
+        customMenu: {},
+        specifications:{}
     }
 
     componentDidMount(){
