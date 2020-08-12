@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Aux from '../../hoc/auxiliry';
-import PCData from './PCData/PCData';
 import PCCustomization from './PCCustomization/PCCustomization';
 import Axios from 'axios';
+import PCSpecifications from './PCSpecifications/PCSpecifications';
 
 class PCBuilder extends Component {
     state = {
@@ -15,6 +15,7 @@ class PCBuilder extends Component {
         Object.keys(this.state.customMenu).map((hardware)=>{
             const firstModelKey = Object.keys(this.state.customMenu[hardware])[0];
             settingInitialSpecifications[hardware] = firstModelKey;
+            return null;
         });
         this.setState({specifications: settingInitialSpecifications});
     }
@@ -50,10 +51,11 @@ class PCBuilder extends Component {
                             <div className="col">
                                 <PCCustomization menu={this.state.customMenu} specs={this.state.specifications} onRadioButtonChange={this.radioButtonChangeHandler}/>
                             </div>
-                            <PCData hardware="CPU" model="i58G" />
                         </div>
                     </div>
-                    <div className="col-sm-6 col-xs-12">PC Specifications</div>
+                    <div className="col-sm-6 col-xs-12">
+                        <PCSpecifications specs={this.state.specifications}/>
+                    </div>
                 </div>
             </Aux>
         );
