@@ -16,12 +16,11 @@ const Collapse = (props) => {
                     </h2>
                 </div>
 
-                <div id={collapseid} className="collapse" aria-labelledby={headerid} data-parent='#collapseofhardwares'>
-                    
+                <div id={collapseid} onChange={(event)=>{props.onRadioButtonChange(event, props.hardware)}} className="collapse" aria-labelledby={headerid} data-parent='#collapseofhardwares'>
                     {Object.keys(props.models).map((model)=>{return (
                         <div key={model} className="card-body">
                             <div className="row">
-                                <input type="radio" id={model} name={props.hardware} value={model}/>
+                                <input type="radio" id={model} name={props.hardware} value={model} checked={model === props.selectedModel}/>
                                 <label htmlFor={model}>{model}</label><br/>
                             </div>
                         </div>
