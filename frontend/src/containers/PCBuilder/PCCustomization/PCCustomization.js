@@ -10,7 +10,7 @@ class PCCustomization extends Component {
                 <div className="accordion" id="collapseofhardwares">
                 {Object.keys(this.props.menu).map((hardware)=>{
                     return (
-                        <Collapse key={hardware} hardware={hardware} models={this.props.menu[hardware]} selectedModel={this.props.specs[hardware]} onRadioButtonChange={this.props.onRadioButtonChange} />
+                        <Collapse key={hardware} hardware={hardware} specs={this.props.specs} menu={this.props.menu} onRadioButtonChange={this.props.onRadioButtonChange} />
                     );
                 })}
                 </div>
@@ -18,5 +18,5 @@ class PCCustomization extends Component {
         );
     }
 }
- 
+
 export default PCCustomization;

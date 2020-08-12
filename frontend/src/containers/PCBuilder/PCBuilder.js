@@ -14,16 +14,15 @@ class PCBuilder extends Component {
         const settingInitialSpecifications = {}
         Object.keys(this.state.customMenu).map((hardware)=>{
             const firstModelKey = Object.keys(this.state.customMenu[hardware])[0];
-            settingInitialSpecifications[hardware] = firstModelKey;
+            settingInitialSpecifications[hardware] = [firstModelKey, this.state.customMenu[hardware][firstModelKey]];
             return null;
         });
         this.setState({specifications: settingInitialSpecifications});
     }
 
     radioButtonChangeHandler = (event, hardware)=>{
-        console.log(hardware, event.target.value)
         let specs = {...this.state.specifications};
-        specs[hardware] = event.target.value;
+        specs[hardware] = [event.target.value, this.state.customMenu[hardware][event.target.value]];
         this.setState({specifications: specs});
     }
 
@@ -49,12 +48,12 @@ class PCBuilder extends Component {
                         <div className="row">PC Image</div>
                         <div className="row">
                             <div className="col">
-                                <PCCustomization menu={this.state.customMenu} specs={this.state.specifications} onRadioButtonChange={this.radioButtonChangeHandler}/>
+                                {Object.keys(this.state.specifications).length ? <PCCustomization menu={this.state.customMenu} specs={this.state.specifications} onRadioButtonChange={this.radioButtonChangeHandler}/>: null}
                             </div>
                         </div>
                     </div>
                     <div className="col-sm-6 col-xs-12">
-                        <PCSpecifications specs={this.state.specifications}/>
+                        {Object.keys(this.state.specifications).length ? <PCSpecifications specs={this.state.specifications}/>: null}
                     </div>
                 </div>
             </Aux>
