@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Layout from './components/Layout/Layout';
+import Layout from './containers/Layout/Layout';
 import PCBuilder from './containers/PCBuilder/PCBuilder';
 
 class App extends Component{
