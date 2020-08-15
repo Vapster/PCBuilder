@@ -9,11 +9,13 @@ const Collapse = (props) => {
     return(
             <div className="card">
                 <div className="card-header" id={headerid}>
-                    <h2 className="mb-0">
-                        <button className="btn btn-link" type="button" data-toggle="collapse" data-target={`#${collapseid}`} aria-expanded="true" aria-controls={collapseid}>
-                        {props.hardware} {props.specs[props.hardware][0]}
-                        </button>
-                    </h2>
+                    <div className="mb-0">
+                        <div className="btn-link" type="button" data-toggle="collapse" data-target={`#${collapseid}`} aria-expanded="true" aria-controls={collapseid}>
+                            <div className="d-flex flex-row justify-content-between">
+                                <div className="">{props.hardware}:&nbsp;</div> <div className="">{props.specs[props.hardware][2]}</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id={collapseid} onChange={(event)=>{props.onRadioButtonChange(event, props.hardware)}} className="collapse" aria-labelledby={headerid} data-parent='#collapseofhardwares'>
@@ -21,7 +23,7 @@ const Collapse = (props) => {
                         <div key={model} className="card-body">
                             <div className="row">
                                 <input type="radio" id={model} name={props.hardware} value={model} checked={model === props.specs[props.hardware][0]}/>
-                                <label htmlFor={model}>{model} {props.menu[props.hardware][model] -  props.specs[props.hardware][1]}</label><br/>
+                                <label htmlFor={model}>{props.menu[props.hardware][model][1]} {props.menu[props.hardware][model][0] -  props.specs[props.hardware][1]}</label><br/>
                             </div>
                         </div>
                     );})}

@@ -14,7 +14,7 @@ class PCBuilder extends Component {
         const settingInitialSpecifications = {}
         Object.keys(this.state.customMenu).map((hardware)=>{
             const firstModelKey = Object.keys(this.state.customMenu[hardware])[0];
-            settingInitialSpecifications[hardware] = [firstModelKey, this.state.customMenu[hardware][firstModelKey]];
+            settingInitialSpecifications[hardware] = [firstModelKey, this.state.customMenu[hardware][firstModelKey][0], this.state.customMenu[hardware][firstModelKey][1]];
             return null;
         });
         this.setState({specifications: settingInitialSpecifications});
@@ -22,14 +22,14 @@ class PCBuilder extends Component {
 
     radioButtonChangeHandler = (event, hardware)=>{
         let specs = {...this.state.specifications};
-        specs[hardware] = [event.target.value, this.state.customMenu[hardware][event.target.value]];
+        specs[hardware] = [event.target.value, this.state.customMenu[hardware][event.target.value][0], this.state.customMenu[hardware][event.target.value][1]];
         this.setState({specifications: specs});
     }
 
     componentDidMount(){
 
     	Axios({
-        	url: 'http://localhost:8080/getall',
+        	url: 'http://192.168.2.20:8080/getall',
         	method: 'GET'
         }).then((res) => {
             this.setState({customMenu: res.data});

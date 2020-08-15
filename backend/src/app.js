@@ -6,50 +6,50 @@ app.use(express.json())
 
 const state = {
     CPU: {
-        i38G: 50,
-        i39G: 60,
-        i58G: 100,
-        i59G: 110,
-        i78G: 170,
-        i79G: 200,
-        i98G: 350,
-        i99G: 380
+        i38G: [50, "Intel i3 8th gen"],
+        i39G: [60, "Intel i3 9th gen"],
+        i58G: [100, "Intel i5 8th gen"],
+        i59G: [110, "Intel i5 9th gen"],
+        i78G: [170, "Intel i7 8th gen"],
+        i79G: [200, "Intel i7 9th gen"],
+        i98G: [350, "Intel i9 8th gen"],
+        i99G: [380, "Intel i9 9th gen"]
     },
     GPU: {
-        g1050: 50,
-        g1060: 60,
-        g1660: 100,
-        r2060: 110,
-        g1070: 170,
-        r2070: 200,
-        g1080: 350,
-        r2080: 380
+        g1050: [50, "NVIDIA gtx 1050"],
+        g1060: [60, "NVIDIA gtx 1060"],
+        g1660: [100, "NVIDIA gtx 1660"],
+        r2060: [110, "NVIDIA gtx 2060"],
+        g1070: [170, "NVIDIA gtx 1070"],
+        r2070: [200, "NVIDIA gtx 2070"],
+        g1080: [350, "NVIDIA gtx 1080"],
+        r2080: [380, "NVIDIA gtx 2080"]
     },
     motherboard: {
-        default: 100,
-        msi: 150,
-        asus: 190
+        gigabyte: [100, "GIGABYTE GA-H110"],
+        msi: [150, "MSI B550-A PRO"],
+        asus: [190, "ASUS TUF B450-PRO"]
     },
     case: {
-        white: 100,
-        black: 130,
+        black: [130, "Cooler Master MasterBox Lite 5"],
+        MUSETEX: [100, "MUSETEX Phantom Black ATX"]
     },
     memory: {
-        s4GB: 50,
-        s8GB: 60,
-        s16GB: 100,
-        d16GB: 110,
-        s32GB: 170,
-        d32GB: 200,
-        d64GB: 350
+        s4GB: [50, "4 GB single channel"],
+        s8GB: [60, "8 GB single channel"],
+        s16GB: [100, "16 GB single channel"],
+        d16GB: [110, "16 GB dual channel"],
+        s32GB: [170, "32 GB single channel"],
+        d32GB: [200, "32 GB dual channel"],
+        d64GB: [350, "64 GB dual channel"]
     },
     storage: {
-        s256GB: 100,
-        s512GB: 170,
-        s1000GB: 350,
-        h512GB: 110,
-        h1000GB: 170,
-        i2000GB: 200
+        s256GB: [100, "256 GB SSD"],
+        s512GB: [170, "512 GB SSD"],
+        s1000GB: [350, "1 TB SSD"],
+        h512GB: [110, "512 GB HDD"],
+        h1000GB: [170, "1 TB HDD"],
+        h2000GB: [200, "2 TB HDD"]
     },
 }
 

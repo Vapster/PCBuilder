@@ -8,7 +8,7 @@ const PCSpecifications = (props) => {
         <React.Fragment>
             {Object.keys(props.specs).map((hardware) => {
                 sum = sum +props.specs[hardware][1];
-                return (<div key={hardware}>{hardware}: {props.specs[hardware][0]}, {props.specs[hardware][1]}</div>)
+                return (<div key={hardware}>{hardware}: {props.specs[hardware][2]}, {props.specs[hardware][1]}</div>)
             })}
             <div>Total sum: {sum}</div>
         </React.Fragment>
