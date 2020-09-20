@@ -3,6 +3,8 @@ import Aux from '../../hoc/auxiliry';
 import PCCustomization from './PCCustomization/PCCustomization';
 import Axios from 'axios';
 import PCSpecifications from './PCSpecifications/PCSpecifications';
+import Case from '../../assets/images/case1.jpg'
+import classes from './PCBuilder.module.css'
 
 class PCBuilder extends Component {
     state = {
@@ -29,23 +31,28 @@ class PCBuilder extends Component {
     componentDidMount(){
 
     	Axios({
-        	url: 'http://192.168.2.20:8080/getall',
+            url: 'http://localhost:8080/getall',
+            //headers: { 'Content-Type': 'application/json'},
         	method: 'GET'
         }).then((res) => {
             this.setState({customMenu: res.data});
             this.setInitialSpecs();
         })
-        .catch(() => {
+        .catch((e) => {
+            console.log(e)
         	console.log("error in /getall request");
         })
     }
 
     render() {
+        // console.log(this.props)
         return (
             <Aux>
                 <div className="container row no-gutters">
                     <div className=" col-sm-6 col-xs-12">
-                        <div className="row">PC Image</div>
+                        <div className="row">
+                            {Object.keys(this.state.specifications).length ? <img className={classes.case} alt="case" src={Case}></img> : null}
+                        </div>
                         <div className="row">
                             <div className="col">
                                 {Object.keys(this.state.specifications).length ? <PCCustomization menu={this.state.customMenu} specs={this.state.specifications} onRadioButtonChange={this.radioButtonChangeHandler}/>: null}

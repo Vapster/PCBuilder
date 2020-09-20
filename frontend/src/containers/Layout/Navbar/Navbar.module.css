@@ -1,0 +1,5 @@
+.nav-item{
+    @media (max-width: 991px) {
+        background-color: red;
+    }
+}

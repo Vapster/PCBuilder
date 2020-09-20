@@ -8,7 +8,6 @@ class Layout extends Component {
         return (
         <Aux>
             <Navbar/>
-            <div>Navbar, sidebar, icon</div>
             {this.props.children}
         </Aux>
         );

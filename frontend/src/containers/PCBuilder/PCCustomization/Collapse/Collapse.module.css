@@ -1,0 +1,17 @@
+.card{
+    width: 100%;
+    margin: 0px auto;
+}
+
+.price{
+    margin-left: auto;
+    margin-right: 0px;
+}
+
+.item{
+    display: flex;
+}
+
+.collapseHeader{
+    color: black;
+}
