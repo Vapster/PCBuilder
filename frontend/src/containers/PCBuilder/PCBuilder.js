@@ -3,8 +3,9 @@ import Aux from '../../hoc/auxiliry';
 import PCCustomization from './PCCustomization/PCCustomization';
 import Axios from 'axios';
 import PCSpecifications from './PCSpecifications/PCSpecifications';
-import Case from '../../assets/images/case1.jpg'
+import Case from '../../assets/images/case/case1.jpg'
 import classes from './PCBuilder.module.css'
+import { connect } from 'react-redux';
 
 class PCBuilder extends Component {
     state = {
@@ -28,24 +29,31 @@ class PCBuilder extends Component {
         this.setState({specifications: specs});
     }
 
+    constructor(props){
+        super(props);
+        this.state.specifications = this.props.specs;
+    }
+
     componentDidMount(){
 
-    	Axios({
+        Axios({
             url: 'http://localhost:8080/getall',
             //headers: { 'Content-Type': 'application/json'},
-        	method: 'GET'
+            method: 'GET'
         }).then((res) => {
             this.setState({customMenu: res.data});
-            this.setInitialSpecs();
+            if (Object.keys(this.state.specifications).length === 0){
+                this.setInitialSpecs();
+            }
         })
         .catch((e) => {
             console.log(e)
-        	console.log("error in /getall request");
+            console.log("error in /getall request");
         })
     }
 
     render() {
-        // console.log(this.props)
+        // console.log(this.props.specs)
         return (
             <Aux>
                 <div className="container row no-gutters">
@@ -60,12 +68,24 @@ class PCBuilder extends Component {
                         </div>
                     </div>
                     <div className="col-sm-6 col-xs-12">
-                        {Object.keys(this.state.specifications).length ? <PCSpecifications specs={this.state.specifications}/>: null}
+                        {Object.keys(this.state.specifications).length ? <PCSpecifications specs={this.state.specifications} submitSpecs={() => this.props.submitSpecs(this.state.specifications)}/>: null}
                     </div>
                 </div>
             </Aux>
         );
     }
 }
- 
-export default PCBuilder;
+
+const mapStateToProps = state => {
+    return ({
+        specs: state.Specifications
+    })
+}
+
+const mapDispatchToProps = dispatch => {
+    return ({
+        submitSpecs: (specs) => dispatch({ type: "ADD_SPECS", specs })
+    })
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PCBuilder);

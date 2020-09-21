@@ -7,9 +7,10 @@ import Speclist from './Speclist/Speclist';
 const PCSpecifications = (props) => {
     
     const handleCheckout = () => {
+        props.submitSpecs()
         props.history.push({
-            pathname: '/checkout',
-            state: props.specs}
+            pathname: '/checkout'
+        }
         )
     } 
 

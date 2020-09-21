@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons'
-import classes from './Navbar.module.css'
+// import classes from './Navbar.module.css'
 
 const Navbar = (props) => {
     return (
