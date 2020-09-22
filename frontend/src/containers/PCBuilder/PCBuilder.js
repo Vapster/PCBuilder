@@ -53,10 +53,11 @@ class PCBuilder extends Component {
     }
 
     render() {
-        // console.log(this.props.specs)
+        console.log(Case)
+        const containerClasses = ["container", "row", "no-gutters", classes.toCenter]
         return (
             <Aux>
-                <div className="container row no-gutters">
+                <div className={containerClasses.join(" ")}>
                     <div className=" col-sm-6 col-xs-12">
                         <div className="row">
                             {Object.keys(this.state.specifications).length ? <img className={classes.case} alt="case" src={Case}></img> : null}

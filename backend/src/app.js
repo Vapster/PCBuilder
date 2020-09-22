@@ -53,6 +53,12 @@ const state = {
     },
 }
 
+const computerCat = [
+    {name:"Budget Desktops", val:500, img: "case6.jpg", description: ["Intel® Core™ i3-1115G4 Processor", "GEFORCE GTX 1050", "GIGABYTE GA-H110", "4 GB single channel", "512 GB HDD"]},
+    {name:"Gaming Desktops", val:900, img: "case5.jpg", description: ["Intel® Core™ i5-1130G7 Processor", "GEFORCE GTX 1070", "GIGABYTE GA-H110", "8 GB single channel", "512 GB HDD"]},
+    {name: "Workstation Desktops", val:2000, img: "case2.jpg", description: ["Intel® Core™ i5-1130G7 Processor", "NVIDIA gtx 1080", "ASUS TUF B450-PRO", "16 GB dual channel", "512 GB SSD"]}
+]
+
 app.get('', (req, res)=>{
     res.json({done: true});
 })
@@ -66,6 +72,11 @@ app.post('/getprices', (req, res)=>{
 app.get('/getall', (req, res) => {
     console.log("req received")
 	res.send(state);
+});
+
+app.get('/getComputerCat', (req, res) => {
+    // console.log("req received")
+	res.send(computerCat);
 });
 
 app.post('/gethardwares', (req, res)=>{

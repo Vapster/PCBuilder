@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons'
+import { NavLink } from 'react-router-dom';
 // import classes from './Navbar.module.css'
 
 const Navbar = (props) => {
@@ -14,12 +15,13 @@ const Navbar = (props) => {
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav mr-auto">
-                    <li className="nav-item active">
-                        <a className="nav-link" href="/abc">Home <span className="sr-only">(current)</span></a>
-                    </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/xyz">Products</a>
+                        {/* <a className="nav-link" href="/Products">Home <span className="sr-only">(current)</span></a> */}
+                        <NavLink className="nav-link" to="/Products">Home</NavLink>
                     </li>
+                    {/* <li className="nav-item">
+                        <a className="nav-link" href="/Products">Products</a>
+                    </li> */}
                     <li className="nav-item">
                         <a className="nav-link" href="/idl">Support</a>
                     </li>
