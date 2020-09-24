@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classes from './Products.module.css'
-import Axios from 'axios';
+import AxiosInstance from '../../axiosInstance'
 import Card from '../../components/Card/Card'
 
 class Products extends Component{
@@ -10,25 +10,22 @@ class Products extends Component{
     }
 
     componentDidMount() {
-        Axios({
-            url: 'http://localhost:8080/getComputerCat',
-            //headers: { 'Content-Type': 'application/json'},
-            method: 'GET'
-        }).then((res) => {
+
+        AxiosInstance("/desktops.json").then((res) => {
             this.setState({cats: res.data});
         })
         .catch((e) => {
             console.log(e)
-            console.log("error in /getComputerCat request");
+            console.log("error in /desktops.json request");
         })
     }
 
     render(){
-        // console.log(this.state.cats)
+        console.log(this.state.cats)
         return(
             <div>
                 <div className={classes.cardsContainer}>
-                    {this.state.cats.map( cat => { return (<Card key={cat.name} className="" title={cat.name} price={cat.val} img={cat.img} des={cat.description} />) })}
+                    {Object.keys(this.state.cats).map( cat => { return (<Card key={this.state.cats[cat]["description"]["name"]} className="" title={this.state.cats[cat]["description"]["name"]} price={this.state.cats[cat]["description"]["val"]} img={this.state.cats[cat]["description"]["img"]} des={this.state.cats[cat]["description"]["baseModel"]} />) })}
                 </div>
             </div>
         )

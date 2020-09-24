@@ -4,7 +4,7 @@ import Button from '../Button/Button'
 
 const Card = (props) => {
 
-    console.log(props.des)
+    // console.log(props.des)
     const images = require.context('../../assets/images/case', true);
     let img = images('./' + props.img);
 

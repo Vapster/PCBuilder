@@ -1,3 +1,5 @@
 backend/node_modules
 frontend/node_modules
+frontend/src/axiosInstance.js
 cases.txt
+pcbuilding-29503-export.json

@@ -15,4 +15,5 @@
 .price{
     display: inline;
     font-weight: 500;
+    width: 60px;
 }

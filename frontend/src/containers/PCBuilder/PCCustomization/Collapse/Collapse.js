@@ -10,9 +10,10 @@ const Collapse = (props) => {
 
 
     const cardClasses = ["card", [classes.card]]
-    const btn_link = [classes.btn_link] 
+    const btn_link = [classes.btn_link]
 
     return(
+        // <div></div>
             <div className={cardClasses.join(" ")}>
                 <div className="card-header" id={headerid}>
                     <div className="mb-0">
@@ -25,11 +26,11 @@ const Collapse = (props) => {
                 </div>
 
                 <div id={collapseid} onChange={(event)=>{props.onRadioButtonChange(event, props.hardware)}} className="collapse" aria-labelledby={headerid} data-parent='#collapseofhardwares'>
-                    {Object.keys(props.menu[props.hardware]).map((model)=>{return (
+                    {props.listOfModels.map((model)=>{return (
                         <div key={model} className="card-body">
                             <div className={classes.item}>
-                                <input type="radio" id={model} name={props.hardware} value={model} checked={model === props.specs[props.hardware][0]}/>
-                                <label htmlFor={model}>{props.menu[props.hardware][model][1]}</label> <span className={classes.price}>$ {props.menu[props.hardware][model][0] -  props.specs[props.hardware][1]}</span><br/>
+                                <input type="radio" id={model} name={props.hardware} value={model} onChange={() => {}} checked={model === props.specs[props.hardware][0]}/>
+                                <label htmlFor={model}>{props.components[model][1]}</label> <span className={classes.price}>$ {props.components[model][0] -  props.specs[props.hardware][1]}</span><br/>
                             </div>
                         </div>
                     );})}

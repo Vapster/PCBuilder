@@ -7,23 +7,19 @@ class PCCustomization extends Component {
     state = {  }
     render() {
 
+        if (!this.props.listOfModels || !this.props.components){
+            return (<div></div>)
+        }
+
         const classesforrow = ["row", "accordion", classes.contain]
+        // console.log(this.props.listOfModels, this.props.components)
 
         return (
-            // <Box title="Customization">
-            //     <div className="row accordion">
-            //         {Object.keys(this.props.menu).map((hardware)=>{
-            //             return (
-            //                 <Collapse key={hardware} hardware={hardware} specs={this.props.specs} menu={this.props.menu} onRadioButtonChange={this.props.onRadioButtonChange} />
-            //             );
-            //         })}
-            //     </div>
-            // </Box>
             <div className={classesforrow.join(" ")} id="collapseofhardwares">
                 <p className={classes.containHead}>Customization</p>
-                    {Object.keys(this.props.menu).map((hardware)=>{
+                    {Object.keys(this.props.listOfModels).map((hardware)=>{
                         return (
-                            <Collapse key={hardware} hardware={hardware} specs={this.props.specs} menu={this.props.menu} onRadioButtonChange={this.props.onRadioButtonChange} />
+                            <Collapse key={hardware} hardware={hardware} listOfModels={this.props.listOfModels[hardware]} specs={this.props.specs} components={this.props.components} onRadioButtonChange={this.props.onRadioButtonChange} />
                         );
                     })}
             </div>
