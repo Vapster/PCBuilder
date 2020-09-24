@@ -9,13 +9,14 @@ const PCSpecifications = (props) => {
     const handleCheckout = () => {
         props.submitSpecs()
         props.history.push({
-            pathname: '/checkout'
+            // pathname: '/checkout'
+            pathname: '/Cart'
         }
         )
     } 
 
     return(
-        <Speclist printSum specs={props.specs}>
+        <Speclist printSum showDes components={props.components} specs={props.specs}>
             <div className={classes.button}>
                 <Button text="Checkout" clicked={handleCheckout}></Button>
             </div>

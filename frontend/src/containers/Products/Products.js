@@ -21,7 +21,7 @@ class Products extends Component{
     }
 
     render(){
-        console.log(this.state.cats)
+        // console.log(this.state.cats)
         return(
             <div>
                 <div className={classes.cardsContainer}>

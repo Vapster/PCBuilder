@@ -20,7 +20,7 @@ const Card = (props) => {
                 <h4 className={ele}>{props.title}</h4>
                 <h5 className={ele}>Starts at: $ {props.price}</h5>
                 <div className={ele}>
-                    {Object.keys(props.des).map( point => <div>{props.des[point]}</div> )}
+                    {Object.keys(props.des).map( point => <div key={props.des[point]}>{props.des[point]}</div> )}
                 </div>
                 <div className={classes.btn}>
                     <Button text="Learn More"/>

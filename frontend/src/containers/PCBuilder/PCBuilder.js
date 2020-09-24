@@ -82,7 +82,7 @@ class PCBuilder extends Component {
                         </div>
                     </div>
                     <div className="col-sm-6 col-xs-12">
-                        {Object.keys(this.state.specifications).length ? <PCSpecifications specs={this.state.specifications} submitSpecs={() => this.props.submitSpecs(this.state.specifications)}/>: null}
+                        {Object.keys(this.state.specifications).length ? <PCSpecifications components={this.state.components} specs={this.state.specifications} submitSpecs={() => this.props.submitSpecs(this.state.specifications)}/>: null}
                     </div>
                 </div>
             </Aux>
