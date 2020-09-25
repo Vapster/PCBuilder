@@ -1,6 +1,8 @@
 import React from 'react';
 import Box from '../../../components/Box/Box'
 import classes from './Order.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faCaretRight, faCaretLeft} from '@fortawesome/free-solid-svg-icons'
 
 const Order = (props) => {
     
@@ -10,7 +12,9 @@ const Order = (props) => {
     return (
         <Box title={props.order.des.name}>
             <img className={classes.image} src={img} alt="order1" />
-            <div>{props.order.des.val}</div>
+            {Object.keys(props.specs).map( (hardware) => { return (<div className={classes.li}>{props.specs[hardware][2]}</div>)} )}
+            <div>Subtotal: {props.order.des.val}</div>
+            <div className={classes.quantity}><span className={classes.text}>Quantity: </span><FontAwesomeIcon icon={faCaretLeft} className="mx-2" size="2x"/><span className={classes.text}>{1}</span><FontAwesomeIcon icon={faCaretRight} className="mx-2" size="2x"/></div>
         </Box>
     )
 }

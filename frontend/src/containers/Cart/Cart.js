@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import Box from '../../components/Box/Box';
 import Order from './Order/Order'
 import { connect } from 'react-redux'
+import Button from '../../components/Button/Button'
 
 class Cart extends Component{
     state = {
@@ -17,13 +18,25 @@ class Cart extends Component{
         ]
     }
 
+
+    // ****************************
+
+        ////////        add specs to orders[0].components
+
+    // ****************************
+
     render(){
         console.log(this.props.specs)
         return(
-            <div>
-                <div>Your Orders</div>
-                {this.state.orders.map((order) => <Order order={order} />)}
-            </div>
+            <React.Fragment>
+                <div>
+                    <div>Your Orders</div>
+                    {this.state.orders.map((order) => <Order order={order} specs={this.props.specs} />)}
+                </div>
+                <div>
+                    <Button text="Checkout" />
+                </div>
+            </React.Fragment>
         )
     }
 }

@@ -1,3 +1,16 @@
 .image{
     width: 100px;
 }
+
+.li{
+    text-decoration: none;
+}
+
+.quantity{
+    display: block;
+    text-align: middle;
+}
+
+.text{
+    margin: auto 0;
+}
