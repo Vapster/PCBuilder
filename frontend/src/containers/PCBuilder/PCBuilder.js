@@ -66,7 +66,7 @@ class PCBuilder extends Component {
     }
 
     render() {
-        // console.log("props.specs", this.props.specs)
+        console.log("props.specs", this.state.specifications)
         const containerClasses = ["container", "row", "no-gutters", classes.toCenter]
         return (
             <Aux>
