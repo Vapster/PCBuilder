@@ -3,5 +3,6 @@ backend/src/mongodb.js
 backend/src/mongoose.js
 frontend/node_modules
 frontend/src/axiosInstance.js
+frontend/src/axiosform.js
 cases.txt
 pcbuilding-29503-export.json

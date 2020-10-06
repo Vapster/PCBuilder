@@ -12,3 +12,12 @@
     margin: 10px;
     width: 85%;
 }
+
+.error{
+    border-color: red;
+}
+
+.error:focus{
+    outline: none !important;
+    border-color: red;
+}

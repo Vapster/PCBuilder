@@ -1,7 +1,7 @@
 const e = require('express')
 const express = require('express')
 const jwt = require('jsonwebtoken')
-// const cors = require('cors')
+const cors = require('cors')
 require('./mongoose')
 const User = require('./models/user')
 const Order = require('./models/orders')
@@ -12,7 +12,7 @@ const sign = "Iwillchangethisanyway"
 const port = process.env.PORT || 3000
 const app = express()
 
-// app.use(cors())
+app.use(cors())
 app.use(express.json())
 
 app.post('/order', async (req, res)=>{
@@ -74,6 +74,7 @@ app.post('/user/login', async (req, res)=>{
 })
 
 app.post('/user', async (req, res)=>{
+    // console.log(req.body)
     const user = new User(req.body)
     const token = await user.generateToken()
 
