@@ -74,18 +74,20 @@ app.post('/user/login', async (req, res)=>{
 })
 
 app.post('/user', async (req, res)=>{
-    // console.log(req.body)
+
     const user = new User(req.body)
     const token = await user.generateToken()
 
     user.tokens = user.tokens.concat({token})
     user.save().then(
         () => {
-            // console.log(req.body)
             res.send({user, token})
         }
     ).catch((e) => {
-        res.send(e.message)
+        console.log(e.code)
+        res.statusMessage = e.code
+        // res.status(400).send(e.message)
+        res.status(400).end()
     })
 })
 

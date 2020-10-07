@@ -6,7 +6,7 @@ const SignIn = (props) => {
     return(
         <div className={classes.contain}>
             <div className={classes.title}>
-                Sign up | Sign in
+                <span onClick={props.clickOnSignup}>Sign up</span> | <span onClick={props.clickOnSignin}>Sign in</span>
             </div>
             <input className={classes.textInput} type="text" placeholder="Email" />
             <input className={classes.textInput} type="text" placeholder="Password" />

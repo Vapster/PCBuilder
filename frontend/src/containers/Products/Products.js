@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from './Products.module.css'
 import AxiosInstance from '../../axiosInstance'
 import Card from '../../components/Card/Card'
+import { connect } from 'react-redux'
 
 class Products extends Component{
 
@@ -21,7 +22,7 @@ class Products extends Component{
     }
 
     render(){
-        // console.log(this.state.cats)
+        console.log(this.props.token)
         return(
             <div>
                 <div className={classes.cardsContainer}>
@@ -32,4 +33,10 @@ class Products extends Component{
     }
 }
 
-export default Products;
+const mapStateToProps = state => {
+    return({
+        token: state.token
+    })
+}
+
+export default connect(mapStateToProps, null)(Products);

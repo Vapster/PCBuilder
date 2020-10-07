@@ -2,7 +2,8 @@ const initialState = {
     Specifications: {},
     components: {},
     listOfModels: {},
-    sum: 0
+    sum: 0,
+    token: ""
 }
 
 const Specifications = (state = initialState, action) => {
@@ -30,6 +31,14 @@ const Specifications = (state = initialState, action) => {
         return({
             ...state,
             listOfModels: action.listOfModels
+        })
+    }
+
+    if (action.type === "ADD_TKN"){
+        // console.log(action.token, "done")
+        return({
+            ...state,
+            token: action.token
         })
     }
 

@@ -11,8 +11,7 @@ const PCSpecifications = (props) => {
         props.history.push({
             // pathname: '/checkout'
             pathname: '/Cart'
-        }
-        )
+        })
     } 
 
     return(

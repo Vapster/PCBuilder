@@ -21,3 +21,14 @@
     outline: none !important;
     border-color: red;
 }
+
+.msg{
+    font-size: x-small;
+    margin: 0;
+}
+
+.errorMsg{
+    color: red;
+    font-size: small;
+    margin: 0;
+}
