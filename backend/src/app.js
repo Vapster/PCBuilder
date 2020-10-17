@@ -68,7 +68,8 @@ app.post('/user/login', async (req, res)=>{
         
         res.send({user, token})
     }catch(e){
-        console.log(e)
+        // console.log(e)
+        res.statusMessage = e.code
         res.status(400).send(e)
     }
 })
@@ -84,7 +85,7 @@ app.post('/user', async (req, res)=>{
             res.send({user, token})
         }
     ).catch((e) => {
-        console.log(e.code)
+        // console.log(e.code)
         res.statusMessage = e.code
         // res.status(400).send(e.message)
         res.status(400).end()

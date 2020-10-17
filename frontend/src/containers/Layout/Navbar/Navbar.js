@@ -3,9 +3,18 @@ import 'bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons'
 import { NavLink } from 'react-router-dom';
-// import classes from './Navbar.module.css'
+import { connect } from 'react-redux'
+import classes from './Navbar.module.css'
 
 const Navbar = (props) => {
+
+    var name = null;
+
+    if (props.token !== ""){
+        var tokenString = Buffer.from(props.token.split('.')[1], 'base64').toString()
+        name = JSON.parse(tokenString)['name']
+    }
+    
     return (
         <header className="header_area">
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -35,7 +44,8 @@ const Navbar = (props) => {
                             <a className="nav-link" href="/ef">Login</a>
                         </li>
                         <li className="nav-item my-lg-0"><FontAwesomeIcon icon={faShoppingCart} className="mx-2" size="2x"/></li>
-                        <li className="nav-item my-lg-0"><FontAwesomeIcon icon={faUser} className="mx-2" size="2x"/></li>
+                        {/* <li className="nav-item my-lg-0"><FontAwesomeIcon icon={faUser} className="mx-2" size="2x"/></li> */}
+                        {name ? <li className={classes.name}>Hi, {name}</li> : null}
                     </ul>
                     
                     
@@ -46,4 +56,10 @@ const Navbar = (props) => {
     );
 }
 
-export default Navbar;
+const mapStateToProps = state => {
+    return ({
+        token: state.token
+    })
+}
+
+export default connect(mapStateToProps, null)(Navbar);

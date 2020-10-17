@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 import Aux from '../../hoc/auxiliry';
 import PCCustomization from './PCCustomization/PCCustomization';
 import PCSpecifications from './PCSpecifications/PCSpecifications';
-import Case from '../../assets/images/case/case1.jpg'
 import classes from './PCBuilder.module.css'
 import { connect } from 'react-redux';
 import AxiosInstance from '../../axiosInstance'
+import queryString from 'query-string'
 
 class PCBuilder extends Component {
     state = {
-        listOfModels: {},
-        components: {},
-        specifications:{}
+        listOfModels: null,
+        components: null,
+        specifications: null,
+        query: {},
+        imgName: "case1.jpg"
     }
 
     setInitialSpecs(){
@@ -25,66 +27,89 @@ class PCBuilder extends Component {
             return null;
         });
         // console.log("new Specs", settingInitialSpecifications)
-        this.setState({specifications: settingInitialSpecifications});
+        const finalSpecs = {
+            components: settingInitialSpecifications,
+            metadata: {
+                model: this.state.model
+            }
+        }
+        this.setState({specifications: finalSpecs});
     }
 
     radioButtonChangeHandler = (event, hardware)=>{
         let specs = {...this.state.specifications};
-        specs[hardware] = [event.target.value, this.state.components[event.target.value][0], this.state.components[event.target.value][1]];
+        specs["components"][hardware] = [event.target.value, this.state.components[event.target.value][0], this.state.components[event.target.value][1]];
         this.setState({specifications: specs});
     }
 
     constructor(props){
         super(props);
         this.state.specifications = this.props.specs;
-        this.state.components = this.props.components;
-        this.state.listOfModels = this.props.listOfModels;
+        // this.state.components = this.props.components;
+        // this.state.listOfModels = this.props.listOfModels;
+        const query = queryString.parse(window.location.search)
+        if (query.model){
+            this.state.model = query.model
+        }else{
+            this.state.model = "budget"
+        }
+        if ( this.state.specifications && this.state.model !== this.state.specifications.metadata.model){
+            this.state.specifications = null
+        }
     }
 
     componentDidMount(){
 
-        if (Object.keys(this.state.components).length || Object.keys(this.state.listOfModels).length){
-            console.log("components are already stored.")
-            return 0
-        }
-        else{
-            AxiosInstance.get("/desktops/budget/components.json").then((res1) => {
-                AxiosInstance.get("/components.json").then((res) => {
-                    this.setState({components: res.data, listOfModels: res1.data})
+        const url = "/desktops/" + this.state.model + ".json";
+        
+        AxiosInstance.get(url).then((res1) => {
+            AxiosInstance.get("/components.json").then((res) => {
+                this.setState({components: res.data, listOfModels: res1.data.components, imgName: res1.data.description.img})
+                if (!this.state.specifications){
                     this.setInitialSpecs()
-                    this.props.submitLOMO(this.state.listOfModels)
-                    this.props.submitComp(this.state.components)
-                }).catch((e) => {
-                    console.log("error at /components.json")
-                    console.log(e)
-                })
+                }
+                this.props.submitLOMO(this.state.listOfModels)
+                this.props.submitComp(this.state.components)
             }).catch((e) => {
-                console.log("error at /desktops/budget.json")
+                console.log("error at /components.json")
                 console.log(e)
             })
-        }
+        }).catch((e) => {
+            console.log("error at /desktops/budget.json")
+            console.log(e)
+        })
     }
 
     render() {
-        console.log("props.specs", this.state.specifications)
+
+        const images = require.context('../../assets/images/case', true);
+        let img = images('./' + this.state.imgName);
+
+        let page = <div></div>
+        
         const containerClasses = ["container", "row", "no-gutters", classes.toCenter]
-        return (
-            <Aux>
-                <div className={containerClasses.join(" ")}>
-                    <div className=" col-sm-6 col-xs-12">
-                        <div className="row">
-                            {Object.keys(this.state.specifications).length ? <img className={classes.case} alt="case" src={Case}></img> : null}
-                        </div>
-                        <div className="row">
-                            <div className="col">
-                                {Object.keys(this.state.specifications).length ? <PCCustomization listOfModels={this.state.listOfModels} components={this.state.components} specs={this.state.specifications} onRadioButtonChange={this.radioButtonChangeHandler}/>: null}
-                            </div>
-                        </div>
+
+        if (this.state.components && this.state.listOfModels && this.state.specifications){
+            page = 
+            <div className={containerClasses.join(" ")}>
+                <div className=" col-sm-6 col-xs-12">
+                    <div className="row">
+                        {this.state.specifications ? <img className={classes.case} alt="case" src={img}></img> : null}
                     </div>
-                    <div className="col-sm-6 col-xs-12">
-                        {Object.keys(this.state.specifications).length ? <PCSpecifications components={this.state.components} specs={this.state.specifications} submitSpecs={() => this.props.submitSpecs(this.state.specifications)}/>: null}
+                    <div className="row">
+                        <div className="col">
+                            {this.state.specifications ? <PCCustomization listOfModels={this.state.listOfModels} components={this.state.components} specs={this.state.specifications.components} onRadioButtonChange={this.radioButtonChangeHandler}/>: null}
+                        </div>
                     </div>
                 </div>
+                <div className="col-sm-6 col-xs-12">
+                    {this.state.specifications ? <PCSpecifications components={this.state.components} specs={this.state.specifications.components} submitSpecs={() => this.props.submitSpecs(this.state.specifications)}/>: null}
+                </div>
+            </div>
+        }
+        return (
+            <Aux>
+                {page}
             </Aux>
         );
     }

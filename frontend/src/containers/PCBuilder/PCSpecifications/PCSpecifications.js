@@ -12,12 +12,12 @@ const PCSpecifications = (props) => {
             // pathname: '/checkout'
             pathname: '/Cart'
         })
-    } 
+    }
 
     return(
         <Speclist printSum showDes components={props.components} specs={props.specs}>
             <div className={classes.button}>
-                <Button text="Checkout" clicked={handleCheckout}></Button>
+                <Button text="Add to Cart" clicked={handleCheckout}></Button>
             </div>
         </Speclist>
     );

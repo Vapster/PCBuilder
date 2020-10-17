@@ -12,3 +12,9 @@
     margin: 10px;
     width: 85%;
 }
+
+.errorMsg{
+    color: red;
+    font-size: small;
+    margin: 0;
+}

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Order from './Order/Order'
 import { connect } from 'react-redux'
 import Button from '../../components/Button/Button'
+import classes from './cart.module.css'
 
 class Cart extends Component{
     state = {
@@ -15,7 +16,9 @@ class Cart extends Component{
                 },
                 components:{}
             }
-        ]
+        ],
+        tempSpecs: null
+        // *********************** remove tempSpecs and put everything into orders
     }
 
 
@@ -25,16 +28,26 @@ class Cart extends Component{
 
     // ****************************
 
+    constructor(props){
+        super(props)
+        if(this.props.specs){
+            this.state.tempSpecs = this.props.specs.components
+        }
+    }
+
     render(){
-        console.log(this.props.specs)
+
+        const emptyCart = <div className={classes.empty}> Your cart is empty. Checkout our Products.</div>
+        const productsButton = <div className={classes.empty}><br/><Button text="Products" clicked={ () => this.props.history.push({ pathname: '/Products' })} /> </div>
+
         return(
             <React.Fragment>
                 <div>
                     <div>Your Orders</div>
-                    {this.state.orders.map((order) => <Order order={order} specs={this.props.specs} />)}
+                    { this.state.tempSpecs ? this.state.orders.map((order) => <Order key={order.des.name} order={order} specs={this.state.tempSpecs} />) : emptyCart}
                 </div>
                 <div>
-                    <Button text="Checkout" />
+                    { this.state.tempSpecs ? <Button text="Checkout" /> : productsButton}
                 </div>
             </React.Fragment>
         )

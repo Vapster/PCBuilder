@@ -90,7 +90,7 @@ class SignUp extends Component{
     constructor(props){
         super(props)
         if (this.props.token.length > 3){
-            this.setState({token: this.props.token})
+            this.state.token = this.props.token
         }
     }
 

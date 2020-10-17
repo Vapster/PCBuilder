@@ -1,7 +1,7 @@
 const initialState = {
-    Specifications: {},
-    components: {},
-    listOfModels: {},
+    Specifications: null,
+    components: null,
+    listOfModels: null,
     sum: 0,
     token: ""
 }

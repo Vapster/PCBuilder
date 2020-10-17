@@ -22,11 +22,11 @@ class Products extends Component{
     }
 
     render(){
-        console.log(this.props.token)
+        // console.log(this.props.token)
         return(
             <div>
                 <div className={classes.cardsContainer}>
-                    {Object.keys(this.state.cats).map( cat => { return (<Card key={this.state.cats[cat]["description"]["name"]} className="" title={this.state.cats[cat]["description"]["name"]} price={this.state.cats[cat]["description"]["val"]} img={this.state.cats[cat]["description"]["img"]} des={this.state.cats[cat]["description"]["baseModel"]} />) })}
+                    {Object.keys(this.state.cats).map( cat => { return (<Card key={cat} className=""  uniqueName={cat} title={this.state.cats[cat]["description"]["name"]} price={this.state.cats[cat]["description"]["val"]} img={this.state.cats[cat]["description"]["img"]} des={this.state.cats[cat]["description"]["baseModel"]} />) })}
                 </div>
             </div>
         )
@@ -36,6 +36,12 @@ class Products extends Component{
 const mapStateToProps = state => {
     return({
         token: state.token
+    })
+}
+
+const mapDispatchToProps = dispatch => {
+    return ({
+        selectProduct: (product) => dispatch({ type: "SET_PRD", product })
     })
 }
 

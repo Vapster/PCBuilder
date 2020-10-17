@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './Card.module.css'
 import Button from '../Button/Button'
+import { withRouter } from 'react-router-dom'
 
 const Card = (props) => {
 
@@ -13,6 +14,13 @@ const Card = (props) => {
     const bodyClasses = [classes.body]
     const ele = [classes.ele]
 
+    const toCustomize = () => {
+        props.history.push({
+            pathname: '/',
+            search: '?model='+props.uniqueName
+        })
+    }
+
     return (
         <div className={cardClasses.join(" ")}>
             <img className={imageClasses.join(" ")} src={ img } alt="Card cap" />
@@ -23,11 +31,11 @@ const Card = (props) => {
                     {Object.keys(props.des).map( point => <div key={props.des[point]}>{props.des[point]}</div> )}
                 </div>
                 <div className={classes.btn}>
-                    <Button text="Learn More"/>
+                    <Button text="Learn More" clicked={toCustomize} />
                 </div>
             </div>
         </div>
     )
 }
 
-export default Card;
+export default withRouter(Card);
