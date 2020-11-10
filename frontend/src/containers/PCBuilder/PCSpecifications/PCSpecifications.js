@@ -5,19 +5,11 @@ import { withRouter } from 'react-router-dom';
 import Speclist from './Speclist/Speclist';
 
 const PCSpecifications = (props) => {
-    
-    const handleCheckout = () => {
-        props.submitSpecs()
-        props.history.push({
-            // pathname: '/checkout'
-            pathname: '/Cart'
-        })
-    }
 
     return(
         <Speclist printSum showDes components={props.components} specs={props.specs}>
             <div className={classes.button}>
-                <Button text="Add to Cart" clicked={handleCheckout}></Button>
+                <Button text="Add to Cart" clicked={props.submitSpecs}></Button>
             </div>
         </Speclist>
     );

@@ -33,6 +33,52 @@ const modelSchema = {
             type: String,
             required: true
         }
+    }],
+    cart:[{
+        components: [{
+            name: {
+                type: String
+            },
+            model: {
+                type: String,
+                required: true,
+                minlength: 4,
+                maxlength: 9
+            }
+        }],
+        metadata: {
+            model: {
+                type: String,
+                required: true
+            },
+            img: {
+                type: String,
+                required: true
+            },
+            val: {
+                type: Number,
+                required: true
+            }
+        }
+    }],
+    orders:[{
+        components: [{
+            name: {
+                type: String
+            },
+            model: {
+                type: String,
+                required: true,
+                minlength: 4,
+                maxlength: 9
+            }
+        }],
+        metadata: {
+            model: {
+                type: String,
+                required: true
+            }
+        }
     }]
 }
 

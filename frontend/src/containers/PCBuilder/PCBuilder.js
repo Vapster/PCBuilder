@@ -5,6 +5,7 @@ import PCSpecifications from './PCSpecifications/PCSpecifications';
 import classes from './PCBuilder.module.css'
 import { connect } from 'react-redux';
 import AxiosInstance from '../../axiosInstance'
+import AxiosForm from '../../axiosform'
 import queryString from 'query-string'
 
 class PCBuilder extends Component {
@@ -19,18 +20,17 @@ class PCBuilder extends Component {
     setInitialSpecs(){
 
         const settingInitialSpecifications = {}
-        // console.log("this.state.listOfModels", this.state.listOfModels)
         Object.keys(this.state.listOfModels).map((hardware)=>{
-            // console.log("from loop", hardware)
-            const firstModelKey = this.state.listOfModels[hardware][0] //Object.keys(this.state.customMenu[hardware])[0];
+            const firstModelKey = this.state.listOfModels[hardware][0]
             settingInitialSpecifications[hardware] = [firstModelKey, this.state.components[firstModelKey][0], this.state.components[firstModelKey][1]];
             return null;
         });
-        // console.log("new Specs", settingInitialSpecifications)
         const finalSpecs = {
             components: settingInitialSpecifications,
             metadata: {
-                model: this.state.model
+                model: this.state.model,
+                img: this.state.imgName,
+                val: 700
             }
         }
         this.setState({specifications: finalSpecs});
@@ -40,6 +40,48 @@ class PCBuilder extends Component {
         let specs = {...this.state.specifications};
         specs["components"][hardware] = [event.target.value, this.state.components[event.target.value][0], this.state.components[event.target.value][1]];
         this.setState({specifications: specs});
+    }
+
+    addToCart = () => {
+        if(this.props.token && this.state.specifications.components){
+
+            let componentsToSend = []
+
+            Object.keys(this.state.specifications.components).map((key) => {
+                componentsToSend.push({name: key, model: this.state.specifications.components[key][0]})
+                return null
+            })
+
+            const body = {
+                components: componentsToSend,
+                metadata: this.state.specifications.metadata
+            }
+            console.log("body ", body)
+
+            AxiosForm({
+                method: 'patch',
+                url: '/cart/add',
+                data: body,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': this.props.token
+                }
+            })
+            .then((response) => {
+                this.props.submitSpecs(this.state.specifications)
+                this.props.history.push({
+                    pathname: '/Cart'
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+        }else{
+            this.props.submitSpecs(this.state.specifications)
+            this.props.history.push({
+                pathname: '/Cart'
+            })
+        }
     }
 
     constructor(props){
@@ -64,10 +106,14 @@ class PCBuilder extends Component {
         
         AxiosInstance.get(url).then((res1) => {
             AxiosInstance.get("/components.json").then((res) => {
-                this.setState({components: res.data, listOfModels: res1.data.components, imgName: res1.data.description.img})
-                if (!this.state.specifications){
-                    this.setInitialSpecs()
-                }
+                this.setState({components: res.data, listOfModels: res1.data.components, imgName: res1.data.description.img},
+                    () => {
+                        if (!this.state.specifications){
+                            this.setInitialSpecs()
+                        }
+                    }
+                )
+                
                 this.props.submitLOMO(this.state.listOfModels)
                 this.props.submitComp(this.state.components)
             }).catch((e) => {
@@ -81,6 +127,8 @@ class PCBuilder extends Component {
     }
 
     render() {
+
+        // console.log(this.props)
 
         const images = require.context('../../assets/images/case', true);
         let img = images('./' + this.state.imgName);
@@ -103,7 +151,7 @@ class PCBuilder extends Component {
                     </div>
                 </div>
                 <div className="col-sm-6 col-xs-12">
-                    {this.state.specifications ? <PCSpecifications components={this.state.components} specs={this.state.specifications.components} submitSpecs={() => this.props.submitSpecs(this.state.specifications)}/>: null}
+                    {this.state.specifications ? <PCSpecifications components={this.state.components} specs={this.state.specifications.components} submitSpecs={this.addToCart}/>: null}
                 </div>
             </div>
         }
@@ -119,7 +167,8 @@ const mapStateToProps = state => {
     return ({
         specs: state.Specifications,
         components: state.components,
-        listOfModels: state.listOfModels
+        listOfModels: state.listOfModels,
+        token: state.token
     })
 }
 

@@ -3,7 +3,7 @@ const initialState = {
     components: null,
     listOfModels: null,
     sum: 0,
-    token: ""
+    token: null
 }
 
 const Specifications = (state = initialState, action) => {
@@ -39,6 +39,14 @@ const Specifications = (state = initialState, action) => {
         return({
             ...state,
             token: action.token
+        })
+    }
+
+    if (action.type === "logout"){
+        // console.log(action.token, "done")
+        return({
+            ...state,
+            token: null
         })
     }
 

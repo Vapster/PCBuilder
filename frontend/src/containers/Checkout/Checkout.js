@@ -6,6 +6,9 @@ import classes from './Checkout.module.css'
 import Box from '../../components/Box/Box'
 import Box1 from '../../assets/images/box.jpg'
 import Box2 from '../../assets/images/expressBox.jpg'
+import Axios from '../../axiosform'
+import AxiosInstance from '../../axiosInstance'
+import Order from '../Cart/Order/Order'
 
 class Checkout extends Component{
     state = {
@@ -17,7 +20,9 @@ class Checkout extends Component{
             pincode: ""
         },
         fastDel: false,
-        tax: 13
+        tax: 13,
+        components: null,
+        orders: []
     }
 
     onDelivaryChange = (event) => {
@@ -28,9 +33,47 @@ class Checkout extends Component{
         }
     }
 
+
+
+    componentDidMount(){
+        if(!this.props.components){
+            AxiosInstance.get("/components.json").then((res) => {
+                this.setState({components: res.data})
+            }).catch((e) => {
+                console.log("error at /components.json")
+            })
+        }else{
+            this.setState({components: this.props.components})
+        }
+
+        if(this.props.token){
+            Axios({
+                method: 'get',
+                url: '/cart',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': this.props.token
+                }
+            })
+            .then((response) => {
+                this.setState({orders: response.data})
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+        }else{
+            if(this.props.specs){
+                this.setState({orders: [this.props.specs]})
+                console.log(this.props.specs)
+            }
+        }
+
+    }
+
     render(){
 
         let sum = 0
+        const emptyCart = <div className={classes.empty}>Please select your orders.</div>
         // console.log(this.props.specs)
 
         let standardClasses = []
@@ -46,7 +89,9 @@ class Checkout extends Component{
 
         return(
             <React.Fragment>
-                <Box title="Orders"></Box>
+                {/* <Box title="Orders"></Box> */}
+                <div>Orders:</div>
+                { this.state.orders.length > 0 && this.state.components ? this.state.orders.map((order, index) => <Order key={index} order={order} components={this.state.components} />) : emptyCart}
                 <Box title="Shipping Address">
                     <form>
                         <input className={classes.text} name="name" type="text" placeholder="Full Name"></input>
@@ -82,7 +127,9 @@ class Checkout extends Component{
 
 const mapStateToProps = state => {
     return ({
-        specs: state.Specifications
+        specs: state.Specifications,
+        token: state.token,
+        components: state.components
     })
 }
 

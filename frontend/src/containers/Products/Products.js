@@ -39,10 +39,10 @@ const mapStateToProps = state => {
     })
 }
 
-const mapDispatchToProps = dispatch => {
-    return ({
-        selectProduct: (product) => dispatch({ type: "SET_PRD", product })
-    })
-}
+// const mapDispatchToProps = dispatch => {
+//     return ({
+//         selectProduct: (product) => dispatch({ type: "SET_PRD", product })
+//     })
+// }
 
 export default connect(mapStateToProps, null)(Products);

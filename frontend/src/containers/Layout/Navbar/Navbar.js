@@ -1,7 +1,8 @@
 import React from 'react';
 import 'bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons'
+// import { faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
 import classes from './Navbar.module.css'
@@ -10,7 +11,7 @@ const Navbar = (props) => {
 
     var name = null;
 
-    if (props.token !== ""){
+    if (props.token){
         var tokenString = Buffer.from(props.token.split('.')[1], 'base64').toString()
         name = JSON.parse(tokenString)['name']
     }
@@ -41,9 +42,9 @@ const Navbar = (props) => {
                 <div className="my-2 my-lg-0">
                     <ul className="navbar-nav">
                         <li className="nav-item my-lg-0">
-                            <a className="nav-link" href="/ef">Login</a>
+                            { props.token ? <NavLink className="nav-link" to="/Logout">Logout</NavLink> : <NavLink className="nav-link" to="/Login">Login</NavLink>}
                         </li>
-                        <li className="nav-item my-lg-0"><FontAwesomeIcon icon={faShoppingCart} className="mx-2" size="2x"/></li>
+                        <NavLink to="/Cart" className="nav-link my-lg-0"><FontAwesomeIcon icon={faShoppingCart} className="mx-2" size="2x"/></NavLink>
                         {/* <li className="nav-item my-lg-0"><FontAwesomeIcon icon={faUser} className="mx-2" size="2x"/></li> */}
                         {name ? <li className={classes.name}>Hi, {name}</li> : null}
                     </ul>
