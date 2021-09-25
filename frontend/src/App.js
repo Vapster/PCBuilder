@@ -7,6 +7,7 @@ import Cart from './containers/Cart/Cart'
 import Products from './containers/Products/Products'
 import Login from './containers/Login/Login'
 import SignOut from './containers/Login/SignOut/SignOut';
+import orderStatus from './containers/Checkout/orderStatus/orderStatus';
 
 class App extends Component{
 
@@ -20,6 +21,7 @@ class App extends Component{
           <Route path="/Cart" exact component={Cart}></Route>
           <Route path="/Login" exact component={Login}></Route>
           <Route path="/Logout" exact component={SignOut}></Route>
+          <Route path="/orders" exact component={orderStatus}></Route>
         </Switch>
       </Layout>
     );

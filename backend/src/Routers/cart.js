@@ -1,11 +1,14 @@
 const express = require('express')
 const router = express.Router()
+const axios = require('axios')
 const auth = require('../middleware/auth')
 
 router.patch('/cart/add', auth, async (req, res)=>{
 
     const allowedUpdates = ["components", "metadata"]
     const isValidOperation = Object.keys(req.body).every((update) => allowedUpdates.includes(update))
+    var components = null
+    var price = 0
 
     if(!isValidOperation){
         return res.status(400).send('Invalid operation!')
@@ -19,7 +22,15 @@ router.patch('/cart/add', auth, async (req, res)=>{
             return res.status(400).send('unable to add to cart!')
         }
 
-        user.cart.push(req.body)
+        await axios.get('https://pcbuilding-29503.firebaseio.com/components.json').then((res) => {
+            components = res.data
+        })
+
+        req.body.components.map( item => { price += components[item.model][0] })
+
+        const product = {...req.body, price: price}
+
+        user.cart.push(product)
         await user.save((error, user)=>{
             if(error){
                 console.log(error)

@@ -26,6 +26,7 @@ const Order = (props) => {
                 </div>
                 <div className={classes.information}>
                     { props.displayPrice ? <div>Subtotal: {700}</div> : null}
+                    { props.displayFixedQuantity ? <div>Quantity: {1}</div> : null}
                     { props.displayQuantity ? <div className={classes.quantity}><span className={classes.text}>Quantity: </span><FontAwesomeIcon icon={faCaretLeft} className="mx-2" size="2x"/><span className={classes.text}>{1}</span><FontAwesomeIcon icon={faCaretRight} className="mx-2" size="2x"/></div> : null}
                 </div>
             </div>

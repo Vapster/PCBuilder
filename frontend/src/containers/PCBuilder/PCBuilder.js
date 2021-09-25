@@ -29,8 +29,7 @@ class PCBuilder extends Component {
             components: settingInitialSpecifications,
             metadata: {
                 model: this.state.model,
-                img: this.state.imgName,
-                val: 700
+                img: this.state.imgName
             }
         }
         this.setState({specifications: finalSpecs});

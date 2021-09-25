@@ -54,28 +54,182 @@ const modelSchema = {
             img: {
                 type: String,
                 required: true
-            },
-            val: {
-                type: Number,
-                required: true
             }
+        },
+        quantity: {
+            type: Number,
+            default: 1
+        },
+        price:{
+            type: Number
         }
     }],
     orders:[{
-        components: [{
-            name: {
-                type: String
+        items:[{
+            components: [{
+                name: {
+                    type: String
+                },
+                model: {
+                    type: String,
+                    required: true,
+                    minlength: 4,
+                    maxlength: 9
+                }
+            }],
+            metadata: {
+                model: {
+                    type: String,
+                    required: true
+                },
+                img: {
+                    type: String,
+                    required: true
+                }
             },
-            model: {
-                type: String,
-                required: true,
-                minlength: 4,
-                maxlength: 9
+            quantity: {
+                type: Number,
+                default: 1
+            },
+            price:{
+                type: Number
             }
         }],
-        metadata: {
-            model: {
+        userInformation:{
+            shippingAdd: {
+                name: {
+                    type: String,
+                    required: true
+                },
+                email: {
+                    type: String,
+                    required: true,
+                    trim: true,
+                    lowercase: true
+                },
+                street1: {
+                    type: String,
+                    required: true,
+                    trim: true,
+                    uppercase: true
+                },
+                street2: {
+                    type: String,
+                    required: true,
+                    trim: true,
+                    uppercase: true
+                },
+                city: {
+                    type: String,
+                    required: true,
+                    trim: true,
+                    uppercase: true
+                },
+                state: {
+                    type: String,
+                    required: true,
+                    trim: true,
+                    uppercase: true
+                },
+                country: {
+                    type: String,
+                    required: true,
+                    trim: true,
+                    uppercase: true
+                },
+                zipcode: {
+                    type: String,
+                    required: true,
+                    trim: true,
+                    uppercase: true,
+                    minlength: 6,
+                    maxlength: 6
+                }
+            },
+            billingAdd: {
+                name: {
+                    type: String,
+                    required: true
+                },
+                // email: {
+                //     type: String,
+                //     required: true,
+                //     trim: true,
+                //     lowercase: true
+                // },
+                street1: {
+                    type: String,
+                    required: true,
+                    trim: true,
+                    uppercase: true
+                },
+                street2: {
+                    type: String,
+                    required: true,
+                    trim: true,
+                    uppercase: true
+                },
+                city: {
+                    type: String,
+                    required: true,
+                    trim: true,
+                    uppercase: true
+                },
+                state: {
+                    type: String,
+                    required: true,
+                    trim: true,
+                    uppercase: true
+                },
+                country: {
+                    type: String,
+                    required: true,
+                    trim: true,
+                    uppercase: true
+                },
+                zipcode: {
+                    type: String,
+                    required: true,
+                    trim: true,
+                    uppercase: true,
+                    minlength: 6,
+                    maxlength: 6
+                }
+            },
+            fastDelivery: {
+                type: Boolean,
+                required: true
+            }
+        },
+        price: {
+            subtotal: {
+                type: Number,
+                required: true
+            },
+            discount: {
                 type: String,
+                required: true
+            },
+            tax: {
+                type: Number,
+                required: true
+            },
+            shipping: {
+                type: Number,
+                required: true
+            }
+        },
+        DelivetyStatus:{
+            status: {
+                type: String,
+                required: true
+            },
+            orderDate: {
+                type: Date,
+                required: true
+            },
+            delivetyDate: {
+                type: Date,
                 required: true
             }
         }

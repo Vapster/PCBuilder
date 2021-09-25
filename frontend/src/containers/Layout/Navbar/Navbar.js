@@ -33,7 +33,8 @@ const Navbar = (props) => {
                         <a className="nav-link" href="/Products">Products</a>
                     </li> */}
                     <li className="nav-item">
-                        <a className="nav-link" href="/idl">Support</a>
+                        {/* <a className="nav-link" href="/idl">Support</a> */}
+                        <NavLink className="nav-link" to="/orders">Orders</NavLink>
                     </li>
                     <li className="nav-item my-lg-0">
                         <a className="nav-link" href="/sdf">About us</a>
