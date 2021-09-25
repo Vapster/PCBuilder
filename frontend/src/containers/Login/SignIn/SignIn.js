@@ -68,7 +68,7 @@ class SignIn extends Component{
                 </div>
                 <input className={classes.textInput} type="text" value={this.state.email} placeholder="Email" onChange={(event) => this.handleForm(event, "email")} required />
                 <input className={classes.textInput} type="password" value={this.state.password} placeholder="Password" onChange={(event) => this.handleForm(event, "password")} required />
-                <Button clicked={this.onSubmit} text="Sign In" />
+                <Button clicked={this.onSubmit} text="Sign In from here" />
                 { this.state.simpleError ? <p className={classes.errorMsg}>Error!</p> : null }
                 { this.state.errorMsg ? <p className={classes.errorMsg}>Wrong email ID or password.</p> : null }
             </div>
